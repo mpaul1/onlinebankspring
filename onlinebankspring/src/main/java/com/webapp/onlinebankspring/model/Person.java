@@ -1,9 +1,13 @@
 package com.webapp.onlinebankspring.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,7 +27,10 @@ public abstract class Person
 	protected String city="";
 	protected String state="";
 	protected String zipCode="";
+	protected long initialDeposit;
 	
+	@OneToMany(mappedBy = "person")
+	private Set<Account> accounts = new HashSet<Account>();
 	
 	public Person()
 	{
@@ -46,14 +53,12 @@ public abstract class Person
 	}
 
 
-	public long getPersonid()
-	{
+	public long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonid(long personid)
-	{
-		this.personId = personid;
+	public void setPersonId(long personId) {
+		this.personId = personId;
 	}
 
 	public String getFirstName()
@@ -138,7 +143,34 @@ public abstract class Person
 		this.zipCode = zipCode;
 	}
 	
-	
+	public Set<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	public void addAccount(Account account) {
+		accounts.add(account);
+		account.setPerson(this);
+	}
+
+	public long getInitialDeposit() {
+		return initialDeposit;
+	}
+
+	public void setInitialDeposit(long initialDeposit) {
+		this.initialDeposit = initialDeposit;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", telephoneNumber=" + telephoneNumber + ", email=" + email + ", password=" + password + ", street="
+				+ street + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", accounts=" + accounts
+				+ "]";
+	}
 
 	
 }

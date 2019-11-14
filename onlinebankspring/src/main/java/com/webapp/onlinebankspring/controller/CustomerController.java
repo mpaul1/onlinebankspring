@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webapp.onlinebankspring.model.*;
+import com.webapp.onlinebankspring.repository.AccountRepository;
 import com.webapp.onlinebankspring.repository.CustomerRepository;
 
 
@@ -30,6 +31,9 @@ public class CustomerController
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
+	private AccountRepository accountRepository;
+	
 	@GetMapping("openaccount")
 	String register(@ModelAttribute("customer") Customer customer, Model model) {
 //			model.addAttribute("customer", new Customer());
@@ -44,6 +48,12 @@ public class CustomerController
 
 			if(customerRepository.findByEmail(customer.getEmail())==null){
 			customerRepository.save(customer);
+			Account account = new CheckingAccount(customer.getInitialDeposit());
+			System.out.println(account);
+			customer.addAccount(account);
+			accountRepository.save(account);
+//			customerRepository.save(customer);
+			
 			redirect.addFlashAttribute("success", "Registration Success");
 			return "redirect:/index3";
 			}else {

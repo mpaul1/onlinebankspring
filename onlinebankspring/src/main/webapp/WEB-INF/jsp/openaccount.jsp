@@ -148,17 +148,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <form:input type="text" class="form-control" path="zipCode" id="zip" placeholder="Your Zip Code" data-rule="minlen:5" data-msg="Please enter at least 5 chars" />
                   <div class="validation"></div>
                 </div>
-<!--				<div><label for="initialdeposit">Initial Deposit</label></div>
+				<div><label for="initialdeposit">Initial Deposit</label></div>
  				<div class="form-group input-group mb-3">	
  					 <div class="input-group-prepend">
  					   <span class="input-group-text">$</span>
  					 </div>
- 					 <input type="text" class="form-control" name="initialdeposit" id="initialdeposit" placeholder="Your Inital Deposit" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)">
+ 					 <form:input type="text" class="form-control" path="initialDeposit" id="initialdeposit" placeholder="Your Inital Deposit" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)" />
 					 <div class="input-group-append">
  					   <span class="input-group-text">.00</span>
  					 </div>
  					 <div class="validation"></div>
-				</div> -->
+				</div>
  
                 <div class="text-center mb-sm-5 mb-4"><button type="submit">Submit</button></div>
               </form:form>
