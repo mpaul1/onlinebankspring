@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 public class CheckingAccount extends Account
 {
 	
-	protected AccountType accountType = AccountType.Checking;
+	
 
 
 	public CheckingAccount() {
 		super();
+		this.accountType = AccountType.Checking;
 	}
 
 
@@ -18,15 +19,7 @@ public class CheckingAccount extends Account
 	{
 		super();
 		this.accountBalance = accountBalance;
-	}
-	
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
+		this.accountType = AccountType.Checking;
 	}
 	
 	@Override

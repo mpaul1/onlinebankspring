@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <%@ page import="com.webapp.onlinebankspring.model.*" %>
 <%
 	Customer customer = (Customer) session.getAttribute("customer");
@@ -186,7 +188,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-group">
 						<label for="street">Street Address:</label>
 						<%
-							out.print(" " + customer.getAddress().getStreet());
+							out.print(" " + customer.getStreet());
 						%>
 						<input type="text" class="form-control" name="street" id="street"
 							placeholder="New Street Address" data-rule="minlen:8"
@@ -196,7 +198,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-group">
 						<label for="city">City:</label>
 						<%
-							out.print(" " + customer.getAddress().getCity());
+							out.print(" " + customer.getCity());
 						%>
 						<input type="text" class="form-control" name="city" id="city"
 							placeholder="New City" data-rule="minlen:4"
@@ -206,7 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-group">
 						<label for="state">State:</label>
 						<%
-							out.print(" " + customer.getAddress().getState());
+							out.print(" " + customer.getState());
 						%>
 						<input type="text" class="form-control" name="state" id="state"
 							placeholder="New State" data-rule="minlen:4"
@@ -216,7 +218,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-group">
 						<label for="zip">Zip Code:</label>
 						<%
-							out.print(" " + customer.getAddress().getZipCode());
+							out.print(" " + customer.getZipCode());
 						%>
 						<input type="text" class="form-control" name="zip" id="zip"
 							placeholder="New Zip Code" data-rule="minlen:5"
@@ -330,7 +332,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="row">
 				<div class="col-lg-7">
 					<p class="">
-						© 2019 Bank of Everyone. All rights reserved | Design by <a
+						Â© 2019 Bank of Everyone. All rights reserved | Design by <a
 							href="http://w3layouts.com"> W3layouts.</a>
 					</p>
 				</div>

@@ -17,7 +17,7 @@ public abstract class Account implements ITransferSource, ITransferDestination
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected long accountNumber;
-
+	protected AccountType accountType;
 	protected long accountBalance = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -26,6 +26,10 @@ public abstract class Account implements ITransferSource, ITransferDestination
 
 	public Account() {
 		super();
+	}
+
+	public Person getPerson() {
+		return person;
 	}
 
 	public void setPerson(Person person) {
@@ -40,6 +44,14 @@ public abstract class Account implements ITransferSource, ITransferDestination
 	public void setAccountNumber(long accountNumber)
 	{
 		this.accountNumber = accountNumber;
+	}
+
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
 	}
 
 	public long getAccountBalance()

@@ -60,10 +60,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="nav-item dropdown">
 				    <a class="nav-link dropdown-toggle navlink-dropdown-toggle" style="display: inline; " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
 				    <div class="dropdown-menu" >
-				      <%-- <% for(Account account:customer.getAccounts()){
+				      <% for(Account account:customer.getAccounts()){
 				    	  out.print("<a class=\"dropdown-item\" href=\"account?accountnumber="+account.getAccountNumber()+"\">"+account.getAccountType()+" | Acct#: "+account.getAccountNumber()+" | Balance $"+account.getAccountBalance());out.print("</a>");
 				      }
-				      %> --%>
+				      %>
 				    </div>
 				 </li>
 				 <li class=""><a href="profile.jsp">Profile</a></li>
