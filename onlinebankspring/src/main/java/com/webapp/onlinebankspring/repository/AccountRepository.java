@@ -6,4 +6,5 @@ import com.webapp.onlinebankspring.model.*;
 
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
+//	Account findbyaccountNumber(Long accountNumber);
 }

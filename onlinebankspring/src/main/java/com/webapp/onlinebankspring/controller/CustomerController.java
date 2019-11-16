@@ -1,6 +1,7 @@
 package com.webapp.onlinebankspring.controller;
 
 import java.net.http.HttpRequest;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import com.webapp.onlinebankspring.model.*;
 import com.webapp.onlinebankspring.repository.AccountRepository;
 import com.webapp.onlinebankspring.repository.CustomerRepository;
 import com.webapp.onlinebankspring.repository.TransactionRepository;
+import com.webapp.onlinebankspring.service.TransferManager;
 
 
 
@@ -36,6 +38,7 @@ public class CustomerController
 	
 	@Autowired
 	private AccountRepository accountRepository;
+
 	
 	@Autowired
 	private TransactionRepository transactionRepository;
@@ -54,10 +57,12 @@ public class CustomerController
 
 			if(customerRepository.findByEmail(customer.getEmail())==null){
 			customerRepository.save(customer);
-			Account account = new CheckingAccount(customer.getInitialDeposit());
-//			System.out.println(account);
+			Account account = new CheckingAccount();
 			customer.addAccount(account);
 			accountRepository.save(account);
+			Customer housewithdrawalcustomer = customerRepository.findByEmail("2@e.c");
+			Optional<Account> housedwithdrawalaccount = accountRepository.findById(4L) ;
+			TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account, housewithdrawalcustomer, housedwithdrawalaccount.get(), customer.getInitialDeposit(), "");
 			session.setAttribute("customer", customer);
 			
 			redirect.addFlashAttribute("success", "Open Account Success");

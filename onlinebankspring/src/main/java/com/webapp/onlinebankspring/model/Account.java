@@ -1,5 +1,8 @@
 package com.webapp.onlinebankspring.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,7 +27,7 @@ public abstract class Account implements ITransferSource, ITransferDestination
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="personId")
 	protected Person person;
-
+	
 	public Account() {
 		super();
 	}

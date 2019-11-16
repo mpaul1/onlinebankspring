@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Transaction
@@ -20,23 +21,24 @@ public class Transaction
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected long transactionId;
-	private Date transactiondate;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="personId")
-	private Customer toCustomer;
+	private Date transactiondate = new Date();
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="accountNumber")
-	private Account toAccount;
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="personId")
+	private Long toCustomer;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="personId")
-	private Customer fromCustomer;
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="accountNumber")
+	private Long toAccount;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="accountNumber")
-	private Account fromAccount;
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="personId")
+	private Long fromCustomer;
+	
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="accountNumber")
+	private Long fromAccount;
 	
 	private long amount;
 	private String externalTransferDetails;
@@ -45,14 +47,14 @@ public class Transaction
 		
 	}
 	
-	public Transaction(Customer toCustomer, Account toAccount, Customer fromCustomer,
-			Account fromAccount, long amount, String externalTransferDetails)
+	public Transaction(Long toCustomer, Long toAccount, Long fromCustomer,
+			Long fromAccount, long amount, String externalTransferDetails)
 	{
 		super();
 		this.toCustomer = toCustomer;
 		this.toAccount = toAccount;
-		this.fromCustomer = fromCustomer;
-		this.fromAccount = fromAccount;
+//		this.fromCustomer = fromCustomer;
+//		this.fromAccount = fromAccount;
 		this.amount = amount;
 		this.transactiondate = new Date();
 		this.externalTransferDetails=  externalTransferDetails;
@@ -89,42 +91,42 @@ public class Transaction
 		this.transactiondate = transactiondate;
 	}
 
-	public Customer getToCustomer()
+	public Long getToCustomer()
 	{
 		return toCustomer;
 	}
 
-	public void setToCustomer(Customer toCustomer)
+	public void setToCustomer(Long toCustomer)
 	{
 		this.toCustomer = toCustomer;
 	}
 
-	public Account getToAccount()
+	public Long getToAccount()
 	{
 		return toAccount;
 	}
 
-	public void setToAccount(Account toAccount)
+	public void setToAccount(Long toAccount)
 	{
 		this.toAccount = toAccount;
 	}
 
-	public Customer getFromCustomer()
+	public Long getFromCustomer()
 	{
 		return fromCustomer;
 	}
 
-	public void setFromCustomer(Customer fromCustomer)
+	public void setFromCustomer(Long fromCustomer)
 	{
 		this.fromCustomer = fromCustomer;
 	}
 
-	public Account getFromAccount()
+	public Long getFromAccount()
 	{
 		return fromAccount;
 	}
 
-	public void setFromAccount(Account fromAccount)
+	public void setFromAccount(Long fromAccount)
 	{
 		this.fromAccount = fromAccount;
 	}
@@ -162,9 +164,9 @@ public class Transaction
 	public String toString()
 	{
 		SimpleDateFormat f=new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
-		return f.format(transactiondate)+","+toCustomer.getPersonId()+","+toAccount.getAccountNumber()+","
-				+fromCustomer.getPersonId()+","+fromAccount.getAccountNumber()+","+amount+","+externalTransferDetails;
-		
+		return f.format(transactiondate)+","+toCustomer+","+toAccount+","+fromCustomer
+		+","+fromAccount+","+amount+","+externalTransferDetails;
+//		+","+fromAccount.getAccountNumber()   +fromCustomer.getPersonId()
 	}
 	
 	
