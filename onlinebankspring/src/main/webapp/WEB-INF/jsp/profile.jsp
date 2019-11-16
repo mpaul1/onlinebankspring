@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="logo">
 					<!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
 					<h1>
-						<a href="index3.jsp"><span class="fa fa-university">
+						<a href="index3"><span class="fa fa-university">
 								Bank of <strong>
 							<%
 								out.print(customer.getFirstName());
@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 				<input type="checkbox" id="drop" />
 				<ul class="menu ml-auto mt-1">
-					<li class=""><a href="index3.jsp">Home</a></li>
+					<li class=""><a href="index3">Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" style="display: inline;"data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
-					<li class="active"><a href="profile.jsp">Profile</a></li>
+					<li class="active"><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
 					<!--				<li class=""><a href="services.jsp">Services</a></li>
  				<li class=""><a href="blog.jsp">Blog</a></li>  
@@ -133,15 +133,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h2 class="heading mb-sm-1 mb-1">Change Your Profile Information</h2><br>
 			<h4 class="heading mx-auto mb-sm-2 mb-2">Please Change the
 				appropriate information below to update your profile. Only the fields you enter will be changed.</h4>
+				<h5 style="color: green;">${updatesuccess}</h5><h5 style="color: red;">${updatefailed}</h5>
 			<div class="row">
 				<form class="col-md-6 col-sm-6 col-xs-12"
-					action="ProfileUpdateServlet" method="post">
+					action="profile" method="post">
 					<div class="form-group">
 						<label for="firstName">First Name:</label>
 						<%
 							out.print(" " + customer.getFirstName());
 						%>
-						<input type="text" name="firstname" class="form-control" id="name"
+						<input type="text" name="firstnamefromform" class="form-control" id="name"
 							placeholder="New First Name" data-rule="minlen:4"
 							data-msg="Please enter at least 4 chars" />
 						<div class="validation"></div>
@@ -151,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getLastName());
 						%>
-						<input type="text" name="lastname" class="form-control" id="name"
+						<input type="text" name="lastnamefromform" class="form-control" id="name"
 							placeholder="New Last Name" data-rule="minlen:4"
 							data-msg="Please enter at least 4 chars" />
 						<div class="validation"></div>
@@ -161,14 +162,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getEmail());
 						%>
-						<input type="email" class="form-control" name="email" id="email"
+						<input type="email" class="form-control" name="emailfromform" id="email"
 							placeholder="New Email" data-rule="email"
 							data-msg="Please enter a valid email" />
 						<div class="validation"></div>
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label> <input type="password"
-							class="form-control" name="password" id="password"
+							class="form-control" name="passwordfromform" id="password"
 							placeholder="The new password you would like to use to login"
 							data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
 						<div class="validation"></div>
@@ -178,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getTelephoneNumber());
 						%>
-						<input class="form-control bfh-phone" type="tel" name="telephone"
+						<input class="form-control bfh-phone" type="tel" name="telephonefromform"
 							placeholder=" New 1-(555)-555-5555" id="telephone"
 							data-rule="telephone"
 							data-message="Please enter a valid telephone"
@@ -190,7 +191,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getStreet());
 						%>
-						<input type="text" class="form-control" name="street" id="street"
+						<input type="text" class="form-control" name="streetfromform" id="street"
 							placeholder="New Street Address" data-rule="minlen:8"
 							data-msg="Please enter at least 8 chars" />
 						<div class="validation"></div>
@@ -200,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getCity());
 						%>
-						<input type="text" class="form-control" name="city" id="city"
+						<input type="text" class="form-control" name="cityfromform" id="city"
 							placeholder="New City" data-rule="minlen:4"
 							data-msg="Please enter at least 4 chars" />
 						<div class="validation"></div>
@@ -210,7 +211,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getState());
 						%>
-						<input type="text" class="form-control" name="state" id="state"
+						<input type="text" class="form-control" name="statefromform" id="state"
 							placeholder="New State" data-rule="minlen:4"
 							data-msg="Please enter at least 4 chars" />
 						<div class="validation"></div>
@@ -220,13 +221,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<%
 							out.print(" " + customer.getZipCode());
 						%>
-						<input type="text" class="form-control" name="zip" id="zip"
+						<input type="text" class="form-control" name="zipfromform" id="zip"
 							placeholder="New Zip Code" data-rule="minlen:5"
 							data-msg="Please enter at least 5 chars" />
 						<div class="validation"></div>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" name="overdraftProtection"
+						<input class="form-check-input" name="overdraftProtectionfromform"
 							type="checkbox" value="true" id="defaultCheck1" 
 							<% if (customer.getOverdraftProtect()==true) {
 							        out.print("checked=\"checked\"");

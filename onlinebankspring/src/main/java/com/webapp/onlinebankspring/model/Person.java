@@ -1,14 +1,19 @@
 package com.webapp.onlinebankspring.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+
 
 @Entity
 public abstract class Person
@@ -29,8 +34,8 @@ public abstract class Person
 	protected String zipCode="";
 	protected long initialDeposit;
 	
-	@OneToMany(mappedBy = "person")
-	private Set<Account> accounts = new HashSet<Account>();
+	@OneToMany(mappedBy = "person",fetch=FetchType.EAGER)
+	private List<Account> accounts = new ArrayList<Account>();
 	
 	public Person()
 	{
@@ -143,11 +148,11 @@ public abstract class Person
 		this.zipCode = zipCode;
 	}
 	
-	public Set<Account> getAccounts() {
+	public List<Account> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(Set<Account> accounts) {
+	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
 

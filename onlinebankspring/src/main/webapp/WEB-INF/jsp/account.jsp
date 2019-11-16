@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-    <%@ page import="com.claim.model.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ page import="com.webapp.onlinebankspring.model.*" %>
     <%@ page import="java.util.*" %>
     <% Customer customer = (Customer) session.getAttribute("customer"); %>
     <% Account bankaccount = (Account) session.getAttribute("bankaccount"); %>
@@ -60,7 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
 			<ul class="menu ml-auto mt-1">
-				<li class=""><a href="index3.jsp">Home</a></li>
+				<li class=""><a href="index3">Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" style="display: inline; color: #fff;" data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
@@ -75,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
-					<li class=""><a href="profile.jsp">Profile</a></li>
+					<li class=""><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
 			</ul>
 		</nav>
@@ -562,7 +564,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7">
-				<p class="">© 2019 Bank of Everyone. All rights reserved | Design by
+				<p class="">Â© 2019 Bank of Everyone. All rights reserved | Design by
 					<a href="http://w3layouts.com"> W3layouts.</a>
 				</p>
 			</div>

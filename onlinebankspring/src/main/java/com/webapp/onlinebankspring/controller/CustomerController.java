@@ -1,5 +1,7 @@
 package com.webapp.onlinebankspring.controller;
 
+import java.net.http.HttpRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webapp.onlinebankspring.model.*;
 import com.webapp.onlinebankspring.repository.AccountRepository;
 import com.webapp.onlinebankspring.repository.CustomerRepository;
+import com.webapp.onlinebankspring.repository.TransactionRepository;
 
 
 
@@ -34,6 +37,9 @@ public class CustomerController
 	@Autowired
 	private AccountRepository accountRepository;
 	
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
 	@GetMapping("openaccount")
 	String register(@ModelAttribute("customer") Customer customer, Model model) {
 //			model.addAttribute("customer", new Customer());
@@ -42,19 +48,19 @@ public class CustomerController
 	}
 	
 	@PostMapping("openaccount")
-	String sign(@ModelAttribute("customer") Customer customer, Model model, RedirectAttributes redirect) {
+	String sign(@ModelAttribute("customer") Customer customer, Model model, RedirectAttributes redirect, HttpSession session) {
 		try
 		{
 
 			if(customerRepository.findByEmail(customer.getEmail())==null){
 			customerRepository.save(customer);
 			Account account = new CheckingAccount(customer.getInitialDeposit());
-			System.out.println(account);
+//			System.out.println(account);
 			customer.addAccount(account);
 			accountRepository.save(account);
-//			customerRepository.save(customer);
+			session.setAttribute("customer", customer);
 			
-			redirect.addFlashAttribute("success", "Registration Success");
+			redirect.addFlashAttribute("success", "Open Account Success");
 			return "redirect:/index3";
 			}else {
 				redirect.addFlashAttribute("error1", "User Already Exists, did not register this user");
@@ -80,12 +86,12 @@ public class CustomerController
 	}
 	
 	@PostMapping("login")
-	String postlogin(@ModelAttribute Customer customer, Model model, RedirectAttributes redirect) {
+	String postlogin(@ModelAttribute Customer customer, Model model, RedirectAttributes redirect, HttpSession session) {
 			
 			Customer thiscustomer = customerRepository.findByEmail(customer.getEmail());
 			if(thiscustomer!=null&&thiscustomer.getPassword().equalsIgnoreCase(customer.getPassword())&&thiscustomer.getEmail().equalsIgnoreCase(customer.getEmail())) {
 				redirect.addFlashAttribute("customer", thiscustomer);
-//				model.addAttribute("customer", thiscustomer);
+				session.setAttribute("customer", customer);
 				redirect.addFlashAttribute("loginsuccess",  "Successful Login");
 				return "redirect:/index3";
 		
@@ -111,6 +117,49 @@ public class CustomerController
 		return "redirect:/index";
 		
 	}
+	
+	@GetMapping("profile")
+	String profile(@ModelAttribute("customer") Customer customer, Model model) {
+		
+		
+		return "profile";
+		
+	}
 
+	@PostMapping("profile")
+	String updateprofile(@ModelAttribute("customer") Customer customer, Model model, @RequestParam String firstnamefromform, @RequestParam String lastnamefromform, @RequestParam String emailfromform, 
+			@RequestParam String passwordfromform, @RequestParam String telephonefromform, @RequestParam String streetfromform, @RequestParam String cityfromform,
+			@RequestParam String statefromform, @RequestParam String zipfromform,  @RequestParam String overdraftProtectionfromform,
+			HttpSession session, RedirectAttributes redirect) {
+		
+		try {
+			Customer thiscustomer = customerRepository.findByEmail(customer.getEmail());
+			
+			if(firstnamefromform!="") {
+				thiscustomer.setFirstName(firstnamefromform);}
+			if(lastnamefromform!="") {thiscustomer.setLastName(lastnamefromform);}
+			if(telephonefromform!="") {thiscustomer.setTelephoneNumber(telephonefromform);}
+			if(emailfromform!="") {thiscustomer.setEmail(emailfromform);}
+			if(passwordfromform!="") {thiscustomer.setPassword(passwordfromform);}
+			if(streetfromform!="") {thiscustomer.setStreet(streetfromform);}
+			if(cityfromform!="") {thiscustomer.setCity(cityfromform);}
+			if(statefromform!="") {thiscustomer.setState(statefromform);}
+			if(zipfromform!="") {thiscustomer.setZipCode(zipfromform);}
+			boolean overdraftProtection2 = Boolean.parseBoolean(overdraftProtectionfromform);
+			if(overdraftProtection2!=customer.getOverdraftProtect()) {customer.setOverdraftProtection(overdraftProtection2);}
+			customer = thiscustomer;
+			customerRepository.save(customer);
+//			session.setAttribute("customer", null);
+			session.setAttribute("customer", customer);
+//			System.out.println("pause");
+			redirect.addFlashAttribute("customer", customer);
+			redirect.addFlashAttribute("updatesuccess", "Update Succeeded");
+		} catch (Exception e) {
+			model.addAttribute("updatefailed", "Update Failed");
+		}
+		
+		
+		return "redirect:/profile";
+	}	
 	
 }

@@ -20,7 +20,7 @@ public abstract class Account implements ITransferSource, ITransferDestination
 	protected AccountType accountType;
 	protected long accountBalance = 0;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="personId")
 	protected Person person;
 
@@ -75,17 +75,17 @@ public abstract class Account implements ITransferSource, ITransferDestination
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(accountNumber).toHashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Account)) return false;
-		Account other = (Account) obj;
-		return new EqualsBuilder().append(accountNumber, other.accountNumber).isEquals();
-	}
+//	@Override
+//	public int hashCode() {
+//		return new HashCodeBuilder().append(accountNumber).toHashCode();
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(!(obj instanceof Account)) return false;
+//		Account other = (Account) obj;
+//		return new EqualsBuilder().append(accountNumber, other.accountNumber).isEquals();
+//	}
 
 	@Override
 	public String toString() {

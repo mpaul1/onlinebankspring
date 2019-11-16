@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.claim.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ page import="com.webapp.onlinebankspring.model.*" %>
 <%
 	Customer customer = (Customer) session.getAttribute("customer");
 %>
@@ -64,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="logo">
 					<!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
 					<h1>
-						<a href="index3.jsp"><span class="fa fa-university">
+						<a href="index3"><span class="fa fa-university">
 								Bank of </span>
 							<%
 								out.print(customer.getFirstName());
@@ -89,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
-					<li class="active"><a href="profile.jsp">Profile</a></li>
+					<li class="active"><a href="profile">Profile</a></li>
 					<li class="active"><a href="signout">Signout</a></li>
 					<!--				<li class=""><a href="services.jsp">Services</a></li>
  				<li class=""><a href="blog.jsp">Blog</a></li>  
@@ -219,7 +222,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="row">
 				<div class="col-lg-7">
 					<p class="">
-						© 2019 Bank of Everyone. All rights reserved | Design by <a
+						Â© 2019 Bank of Everyone. All rights reserved | Design by <a
 							href="http://w3layouts.com"> W3layouts.</a>
 					</p>
 				</div>
