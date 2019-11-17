@@ -53,8 +53,8 @@ public class Transaction
 		super();
 		this.toCustomer = toCustomer;
 		this.toAccount = toAccount;
-//		this.fromCustomer = fromCustomer;
-//		this.fromAccount = fromAccount;
+		this.fromCustomer = fromCustomer;
+		this.fromAccount = fromAccount;
 		this.amount = amount;
 		this.transactiondate = new Date();
 		this.externalTransferDetails=  externalTransferDetails;

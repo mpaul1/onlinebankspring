@@ -68,18 +68,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
 					<h1>
 						<a href="index3"><span class="fa fa-university">
-								Bank of </span>
+								Bank of <strong>
 							<%
 								out.print(customer.getFirstName());
-							%></a>
+							%></strong></a>
 					</h1>
 				</div>
 				<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 				<input type="checkbox" id="drop" />
 				<ul class="menu ml-auto mt-1">
-					<li class="active"><a href="index3">Home</a></li>
+					<li class=""><a href="index3">Home</a></li>
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						class="nav-link dropdown-toggle" style="display: inline;"data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
 						<div class="dropdown-menu">
 							<%
@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
-					<li class=""><a href="addaccount">Add Account</a></li>
+					<li class="active"><a href="addaccount">Add Account</a></li>
 					<li class=""><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
 					<!--				<li class=""><a href="services.jsp">Services</a></li>
@@ -121,7 +121,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="index3.jsp">Home</a></li>
-					<li class="breadcrumb-item" aria-current="page">Insufficient Funds</li>
+					<li class="breadcrumb-item" aria-current="page">Add Account</li>
 				</ol>
 			</nav>
 		</div>
@@ -131,7 +131,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- Content -->
 	<section class="contact py-5">
 		<div class="container py-lg-5">
-			<h2 class="heading mb-sm-1 mb-1">We're sorry your account has insufficient funds and we are unable to complete your withdrawal or transfer request!</h2><br>
+			<h2 class="heading mb-sm-1 mb-1">Add a new Savings Account</h2><br>
+			<h1>${status}</h1>
+			<h4 class="heading mx-auto mb-sm-2 mb-2">Please Change the
+				appropriate information below to update your profile. Only the fields you enter will be changed.</h4>
+				<h5 style="color: green;">${updatesuccess}</h5><h5 style="color: red;">${updatefailed}</h5>
+			<div class="row">
+				<form class="col-md-6 col-sm-6 col-xs-12"
+					action="addaccount" method="post">
+					<div class="form-group">
+            	<label for="customernumber">Customer Id</label>
+              <input type="text" name="personid" class="form-control" id="personid" value=<%out.print(customer.getPersonId());%> readonly>
+            </div>
+            <div><label for="initialdeposit">Initial Deposit</label></div>
+            <div class="form-group input-group mb-3">	
+				 <div class="input-group-prepend">
+				   <span class="input-group-text">$</span>
+				 </div>
+				 <input type="text" class="form-control" name="deposit" id="deposit" placeholder="Your Initail Deposit Amount" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)">
+			 	 <div class="input-group-append">
+				   <span class="input-group-text">.00</span>
+				 </div>
+				 <div class="validation"></div>
+			</div>
+             <div class="form-group">
+			    <label for="typeofaccount">Select Check Style</label>
+			    <select name="typeofaccount" multiple class="form-control" id="typeofaccount" required>
+			      <option>Checking</option>
+			      <option>Savings</option>
+			      <!-- <option>House</option> -->
+			    </select>
+		  	</div>
+		  	<button type="submit" class="btn btn-info btn-block btn-round">Add Account</button>
+				</form>
+			</div>
 		</div>
 	</section>
 

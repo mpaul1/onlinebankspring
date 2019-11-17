@@ -13,7 +13,8 @@ import com.webapp.onlinebankspring.repository.TransactionRepository;
 public class TransferManager
 {
 	
-	public static String Transfer(CustomerRepository customerRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, Customer c, Account s, Customer c2, Account d, Long value,
+	public static String Transfer(CustomerRepository customerRepository, AccountRepository accountRepository, 
+			TransactionRepository transactionRepository, Customer c, Account s, Customer c2, Account d, Long value,
 			String externalTransferDetails)
 	{
 		Customer housedepositcustomer = customerRepository.findByEmail("1@e.c");

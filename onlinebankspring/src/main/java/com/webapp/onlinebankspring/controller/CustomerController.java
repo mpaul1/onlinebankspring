@@ -62,10 +62,11 @@ public class CustomerController
 			accountRepository.save(account);
 			Customer housewithdrawalcustomer = customerRepository.findByEmail("2@e.c");
 			Optional<Account> housedwithdrawalaccount = accountRepository.findById(4L) ;
-			TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account, housewithdrawalcustomer, housedwithdrawalaccount.get(), customer.getInitialDeposit(), "");
+			TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, housewithdrawalcustomer, housedwithdrawalaccount.get(),
+					customer, account, customer.getInitialDeposit(), "Initial Deposit");
 			session.setAttribute("customer", customer);
 			
-			redirect.addFlashAttribute("success", "Open Account Success");
+			redirect.addFlashAttribute("newaccountsuccess", "Open Account Success");
 			return "redirect:/index3";
 			}else {
 				redirect.addFlashAttribute("error1", "User Already Exists, did not register this user");
@@ -118,6 +119,8 @@ public class CustomerController
 	String getsignout(@ModelAttribute Customer customer, Model model, HttpSession session) {
 			model.addAttribute("customer", new Customer());
 			session.setAttribute("customer", null);
+			session.setAttribute("accounttransactions", null);
+			session.setAttribute("bankaccount", null);
 			session.invalidate();
 		return "redirect:/index";
 		

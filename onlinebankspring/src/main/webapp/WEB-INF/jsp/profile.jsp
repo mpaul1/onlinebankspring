@@ -92,6 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
+					<li class=""><a href="addaccount">Add Account</a></li>
 					<li class="active"><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
 					<!--				<li class=""><a href="services.jsp">Services</a></li>

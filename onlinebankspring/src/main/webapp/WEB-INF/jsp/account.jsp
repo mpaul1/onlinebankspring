@@ -1,3 +1,4 @@
+<%@page import="com.webapp.onlinebankspring.service.TransactionAsObjects"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,8 +7,11 @@
     <%@ page import="com.webapp.onlinebankspring.model.*" %>
     <%@ page import="java.util.*" %>
     <% Customer customer = (Customer) session.getAttribute("customer"); %>
-    <% Account bankaccount = (Account) session.getAttribute("bankaccount"); %>
-    <% ArrayList<Transaction> transactions = (ArrayList<Transaction>)session.getAttribute("accounttransactions"); %>
+    <% Account bankaccount = (Account) session.getAttribute("account"); %>
+    <% ArrayList<Transaction> stringtransactions = (ArrayList<Transaction>)session.getAttribute("stringaccounttransactions"); %>
+    <% ArrayList<TransactionAsObjects> transactions = (ArrayList<TransactionAsObjects>) session.getAttribute("accounttransactions"); %>
+    <% System.out.println("pause"); %> 
+
 <!--
 author: W3layouts
 author URL: http://w3layouts.com
@@ -17,6 +21,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%
+response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+response.setHeader("Pragma","no-cache"); //HTTP 1.0
+response.setDateHeader ("Expires", 0);
+//prevents caching at the proxy server
+%>
 <title>Bank of Everyone</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,12 +81,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								for (Account account : customer.getAccounts())
 								{
 									out.print("<a class=\"dropdown-item\" href=\"account?accountnumber=" + account.getAccountNumber()
-											+ "\">" + account.getAccountType() + " | Acct#: " + account.getAccountNumber() + " | Balance $"
+											+ "\""+">" + account.getAccountType() + " | Acct#: " + account.getAccountNumber() + " | Balance $"
 											+ account.getAccountBalance());
 									out.print("</a>");
 								}
 							%>
 						</div></li>
+					<li class=""><a href="addaccount">Add Account</a></li>
 					<li class=""><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
 			</ul>
@@ -165,6 +176,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section class="container py-2">
 	<div class="container py-lg-1">
 		<h4 class="container mb-sm-5 mb-2">Account Transaction Details for the Past 30 Days</h4>
+<%-- 		<% out.print(stringtransactions); %>
+		<% out.print(transactions); %> --%>
 	</div>
 		<div class="table-responsive">
 		  <table class="table">
@@ -174,18 +187,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    </tr>
 		  </thead>
 		  <tbody>
-			<% 
-			Date date = new Date();
-			Calendar c = Calendar.getInstance();
-			c.setTime(date);
-			c.add(Calendar.DATE, -31);
-			Date thirtydaysago = c.getTime();
-			for(Transaction t:transactions){
-				long tamount=0;
-				if(t.getFromAccount().getAccountNumber()==2||t.getToAccount().getAccountNumber()==bankaccount.getAccountNumber()){tamount = -t.getAmount();}else{tamount = t.getAmount();}
-
-				if(t.getTransactiondate().after(thirtydaysago))
-				{
+		   			<% 
+			for(TransactionAsObjects t:transactions){
+				Long tamount=0L;
+				if(t.getFromAccount().getAccountNumber()==2L||t.getToAccount().getAccountNumber()==bankaccount.getAccountNumber()){tamount = -t.getAmount();}else{tamount = t.getAmount();}
 					out.print("<tr><td>"+t.getTransactiondate()+"</td>"
 								+"<td>"+t.getToCustomer().getFullName()+"</td>"
 								+"<td>"+t.getToAccount().getAccountNumber()+"</td>"
@@ -194,12 +199,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								+"<td>"+tamount+"</td>"
 								+"<td>"+t.getExternalTransferDetails()+"</td>"
 								+"</tr>");
-				}
+				
 			}
 			
 			%>
-
-		
 		  </tbody>
 		 </table>
 		 </div>
@@ -218,10 +221,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
       <div class="modal-body">
         <div class="form-title text-center">
-          <h4>Make A Depost</h4>
+          <h4>Make A Deposit</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form action="MakeDepositServlet" method="post">
+          <form action="makedeposit" method="post">
             <div class="form-group">
             <label for="accountnumber">Account Number</label>
               <input type="text" name="accountnumber" class="form-control" id="accountnumber" value=<%out.print(bankaccount.getAccountNumber());%> readonly>
@@ -260,17 +263,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <h4>Withdraw Cash</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form action="WithdrawalServlet" method="post">
+          <form action="withdrawal" method="post">
             <div class="form-group">
             <label for="accountnumber">Account Number</label>
               <input type="text" name="accountnumber" class="form-control" id="accountnumber" value=<%out.print(bankaccount.getAccountNumber());%> readonly>
             </div>
-            <div><label for="initialdeposit">Cash Amount</label></div>
+            <div><label for="amount">Cash Amount</label></div>
             <div class="form-group input-group mb-3">	
 				 <div class="input-group-prepend">
 				   <span class="input-group-text">$</span>
 				 </div>
-				 <input type="text" class="form-control" name="deposit" id="deposit" placeholder="Your Deposit Amount" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)">
+				 <input type="text" class="form-control" name="amount" id="amount" placeholder="Your Deposit Amount" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)">
 			 	 <div class="input-group-append">
 				   <span class="input-group-text">.00</span>
 				 </div>
@@ -629,6 +632,12 @@ $(document).ready(function(){
         $(this).find('#statementYear').focus();
     });
 });
+</script>
+<script>
+function getSelectValue(selectID){
+    pick_ = document.getElementById(selectID).value;
+    location.reload(); 
+}
 </script>
 
 

@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 				<input type="checkbox" id="drop" />
 				<ul class="menu ml-auto mt-1">
-					<li class="active"><a href="index3.jsp">Home</a></li>
+					<li class="active"><a href="index3">Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
@@ -92,8 +92,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								}
 							%>
 						</div></li>
-					<li class="active"><a href="profile">Profile</a></li>
-					<li class="active"><a href="signout">Signout</a></li>
+					<li class=""><a href="addaccount">Add Account</a></li>
+					<li class=""><a href="profile">Profile</a></li>
+					<li class=""><a href="signout">Signout</a></li>
 					<!--				<li class=""><a href="services.jsp">Services</a></li>
  				<li class=""><a href="blog.jsp">Blog</a></li>  
 				<li class=""><a href="contact.jsp">Contact</a></li>
