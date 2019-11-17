@@ -303,7 +303,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <h4>Close/Delete Bank Account</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form action="DeleteAccountServlet" method="post">
+          <form action="closeaccount" method="post">
             <div class="form-group">
               <input type="text" name="accountnumber" class="form-control" id="accountnumber" value=<%out.print(bankaccount.getAccountNumber());%> readonly>
             </div>
@@ -330,7 +330,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <h4>Order Checks</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form action="OrderChecksServlet" method="post">
+          <form action="orderchecks" method="post">
             <div class="form-group">
             	<label for="accountnumber">Account Number</label>
               <input type="text" name="accountnumber" class="form-control" id="accountnumber" value=<%out.print(bankaccount.getAccountNumber());%> readonly>

@@ -47,7 +47,7 @@ public class AccountController {
 	}
 
 	@ModelAttribute("accounttransactions")
-	public ArrayList<TransactionAsObjects> accounttransactions(){
+	public ArrayList<TransactionAsObjects> accounttransactions() {
 		ArrayList<TransactionAsObjects> accounttransactions = new ArrayList<TransactionAsObjects>();
 		return accounttransactions;
 	}
@@ -71,11 +71,12 @@ public class AccountController {
 	private TransactionRepository transactionRepository;
 
 	@GetMapping("account")
-	String getaccount(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account, 
-			@ModelAttribute("accounttransactions") ArrayList<TransactionAsObjects> accounttransactions,	Model model, @RequestParam String accountnumber, HttpSession session) {
+	String getaccount(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			@ModelAttribute("accounttransactions") ArrayList<TransactionAsObjects> accounttransactions, Model model,
+			@RequestParam String accountnumber, HttpSession session) {
 		session.removeAttribute("accounttransactions");
 		session.removeAttribute("account");
-		
+
 		account = accountRepository.findbyAccountNumber(Long.parseLong(accountnumber));
 		model.addAttribute("account", account);
 		session.setAttribute("account", account);
@@ -90,8 +91,8 @@ public class AccountController {
 
 //		ArrayList<TransactionAsObjects> objectaccounttransactions = new ArrayList<TransactionAsObjects>();
 
-		ArrayList<TransactionAsObjects>  objectaccounttransactions = TransactionAsObjects.transactionsAsObjects(customerRepository, accountRepository, transactionRepository,
-				accountnumber);
+		ArrayList<TransactionAsObjects> objectaccounttransactions = TransactionAsObjects
+				.transactionsAsObjects(customerRepository, accountRepository, transactionRepository, accountnumber);
 //		for (TransactionAsObjects t : objectaccounttransactions) {
 //			System.out.println(t);
 //		}
@@ -110,19 +111,55 @@ public class AccountController {
 		Optional<Account> housedwithdrawalaccount = accountRepository.findById(4L);
 		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, housewithdrawalcustomer,
 				housedwithdrawalaccount.get(), customer, account, Long.parseLong(deposit), "Deposit");
-		String accounturl = "?accountnumber="+accountnumber;
-		return "redirect:/account"+accounturl;
+		String accounturl = "?accountnumber=" + accountnumber;
+		return "redirect:/account" + accounturl;
 	}
-	
+
 	@PostMapping("withdrawal")
 	String withdrawal(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
-			Model model, @RequestParam String accountnumber, @RequestParam String amount, HttpSession session, RedirectAttributes redirect) {
+			Model model, @RequestParam String accountnumber, @RequestParam String amount, HttpSession session,
+			RedirectAttributes redirect) {
 		Customer housewithdrawalcustomer = customerRepository.findByEmail("1@e.c");
 		Optional<Account> housedwithdrawalaccount = accountRepository.findById(2L);
-		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,housewithdrawalcustomer,
-				housedwithdrawalaccount.get(), Long.parseLong(amount), "Withdrawal");
-		String accounturl = "?accountnumber="+accountnumber;
-		return "redirect:/account"+accounturl;
+		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,
+				housewithdrawalcustomer, housedwithdrawalaccount.get(), Long.parseLong(amount), "Withdrawal");
+		String accounturl = "?accountnumber=" + accountnumber;
+		return "redirect:/account" + accounturl;
+	}
+
+	@PostMapping("closeaccount")
+	String closeaccount(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			Model model, @RequestParam String accountnumber, HttpSession session,
+			RedirectAttributes redirect) {
+		account = accountRepository.findbyAccountNumber(Long.parseLong(accountnumber));
+		
+			for (int i = 0; i < customer.getAccounts().size(); i++) {
+				if (customer.getAccounts().get(i).getAccountNumber() == Long.parseLong(accountnumber)) {
+					customer.getAccounts().remove(i);
+
+					
+					accountRepository.deleteById(account.getAccountNumber());
+					model.addAttribute("accounttransactions", null);
+					session.removeAttribute("accounttransactions");
+					session.removeAttribute("account");
+					model.addAttribute("account", null);
+				}
+			}
+			
+			if(customer.getAccounts().size()!=0) 
+			{
+//				customerRepository.save(customer);
+//				model.addAttribute("customer", new Customer());
+//				model.addAttribute("customer", customer);
+//				session.setAttribute("customer", customer);
+				return "redirect:/index3";
+			}else {
+				customerRepository.deleteById(customer.getPersonId());
+				return "redirect:/signout";
+			}
+			
+
+		
 	}
 
 	@GetMapping("addaccount")
@@ -180,6 +217,13 @@ public class AccountController {
 		}
 
 		return "redirect:/index3";
+	}
+
+	@PostMapping("orderchecks")
+	String orderchecks(@ModelAttribute("customer") Customer customer, Model model) {
+//			model.addAttribute("customer", new Customer());
+		return "checkordersuccess";
+
 	}
 
 }
