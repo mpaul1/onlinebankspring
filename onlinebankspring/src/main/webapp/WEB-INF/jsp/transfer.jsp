@@ -6,7 +6,7 @@
     <%@ page import="com.webapp.onlinebankspring.model.*" %>
     <%@ page import="java.util.*" %>
     <% Customer customer = (Customer) session.getAttribute("customer"); %>
-    <% Account bankaccount = (Account) session.getAttribute("bankaccount"); %>
+    <% Account bankaccount = (Account) session.getAttribute("account"); %>
     <% ArrayList<Transaction> transactions = (ArrayList<Transaction>)session.getAttribute("accounttransactions"); %>
     <% ArrayList<Customer> customers = (ArrayList<Customer>)session.getAttribute("customers"); %>
 <!--
@@ -58,21 +58,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<nav class="py-3 d-lg-flex">
 			<div id="logo">
 <!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
-				<h1><a href="index3.jsp"><span class="fa fa-university"> Bank of </span><% out.print(customer.getFirstName()); %></a></h1>
+				<h1><a href="index3"><span class="fa fa-university"> Bank of </span><% out.print(customer.getFirstName()); %></a></h1>
 			</div>
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
 			<ul class="menu ml-auto mt-1">
 				<li class="active"><a href="index3">Home</a></li>
 				<li class="nav-item dropdown">
-				    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
-				    <div class="dropdown-menu">
+				    <a class="nav-link dropdown-toggle navlink-dropdown-toggle" style="display: inline; " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accounts</a>
+				    <div class="dropdown-menu" >
 				      <% for(Account account:customer.getAccounts()){
-				    	  out.print("<a class=\"dropdown-item\" href=\"account.jsp?accountnumber="+account.getAccountNumber()+"\">"+account.getAccountType()+" | Acct#: "+account.getAccountNumber()+" | Balance $"+account.getAccountBalance());out.print("</a>");
+				    	  out.print("<a class=\"dropdown-item\" href=\"account?accountnumber="+account.getAccountNumber()+"\">"+account.getAccountType()+" | Acct#: "+account.getAccountNumber()+" | Balance $"+account.getAccountBalance());out.print("</a>");
 				      }
 				      %>
 				    </div>
 				 </li>
+				<li class=""><a href="addaccount">Add Account</a></li>
 				<li class=""><a href="profile">Profile</a></li>
 				<li class=""><a href="signout">Signout</a></li>
 <!--				<li class=""><a href="services.jsp">Services</a></li>
@@ -128,18 +129,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		
 		<div class="tab-content" id="myTabContent">
 		  <div class="tab-pane fade show active" id="transfer1" role="tabpanel" aria-labelledby="transfer1-tab">
-		  		<form action="SelfTransferServlet" method="post">
+		  		<form action="transfertoaccount" method="post">
 			  		<h4 class="container mb-sm-5 mb-2">Transfer Between Your Accounts</h4>
 			  		<div><span>From your account: </span><% out.print(bankaccount.getAccountNumber());%><span> | Balance: $ <% out.print(bankaccount.getAccountBalance());%></span></div>
 			  		<div>
 			  		<div class="form-group">
 					  <label for="sel1">To your account:</label>
-					  <select class="form-control" name="transferToAccount" id="sel1">
+					  <select class="form-control" name="transfertoaccount" id="sel1">
 						<%for(Account account:customer.getAccounts()){if(account.getAccountNumber()!=bankaccount.getAccountNumber()){out.print("<option>"+account.getAccountNumber()+"</option>");}} %>
 					  </select>
 					</div>
 			  		</div>
-			  		<div><label for="initialdeposit">Trasnfer Amount</label></div>
+			  		<div><label for="transferamount">Transfer Amount</label></div>
 		            <div class="form-group input-group mb-3">	
 						 <div class="input-group-prepend">
 						   <span class="input-group-text">$</span>
@@ -154,13 +155,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  	</form>
 		  </div>
 		  <div class="tab-pane fade" id="transfer2" role="tabpanel" aria-labelledby="transfer2-tab"> 
-		  <form action="TransferToCustomerServlet" method="post">
+		  <form action="transfertocustomer" method="post">
 			  		<h4 class="container mb-sm-5 mb-2">Transfer From Your Account to Another Bank Customer</h4>
 			  		<div><span>From your account: </span><% out.print(bankaccount.getAccountNumber());%><span> | Balance: $ <% out.print(bankaccount.getAccountBalance());%></span></div>
 			  		<div>
 			  		<div class="form-group">
-					  <label for="sel1">To Customer:</label>
-					  <select class="form-control" name="transferToCustomer" id="sel2">
+					  <label for="transfertocustomer">To Customer:</label>
+					  <select class="form-control" name="transfertocustomer" id="sel2">
 						<%for(Customer tocustomer:customers){out.print("<option>"+tocustomer.getFullName()+"</option>");} %>
 					  </select>
 					</div>
@@ -183,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  
 		  </div>
 		  <div class="tab-pane fade" id="transfer3" role="tabpanel" aria-labelledby="transfer3-tab">
-		  	<form action="TransferToExternalCustomerServlet" method="post">
+		  	<form action="transfertoexternalcustomer" method="post">
 			  		<h4 class="container mb-sm-5 mb-2">Transfer From Your Account to Another Customer at Another Bank</h4>
 			  		<div><span>From your account: </span><% out.print(bankaccount.getAccountNumber());%><span> | Balance: $ <% out.print(bankaccount.getAccountBalance());%></span></div>
 			  		<div>

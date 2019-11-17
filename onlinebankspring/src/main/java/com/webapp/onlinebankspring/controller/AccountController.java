@@ -32,7 +32,7 @@ import com.webapp.onlinebankspring.model.Transaction;
 import antlr.collections.List;
 
 @Controller
-@SessionAttributes({ "customer", "account", "accounttransactions" })
+@SessionAttributes({ "customer", "account", "accounttransactions", "customers" })
 public class AccountController {
 
 	@ModelAttribute("customer")
@@ -50,6 +50,12 @@ public class AccountController {
 	public ArrayList<TransactionAsObjects> accounttransactions() {
 		ArrayList<TransactionAsObjects> accounttransactions = new ArrayList<TransactionAsObjects>();
 		return accounttransactions;
+	}
+	
+	@ModelAttribute("customers")
+	public ArrayList<Customer> customers() {
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		return customers;
 	}
 
 	Date thirtydaysagodate() {
@@ -111,6 +117,9 @@ public class AccountController {
 		Optional<Account> housedwithdrawalaccount = accountRepository.findById(4L);
 		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, housewithdrawalcustomer,
 				housedwithdrawalaccount.get(), customer, account, Long.parseLong(deposit), "Deposit");
+		customer = customerRepository.findByEmail(customer.getEmail());
+		model.addAttribute("customer", customer);
+		
 		String accounturl = "?accountnumber=" + accountnumber;
 		return "redirect:/account" + accounturl;
 	}
@@ -123,6 +132,8 @@ public class AccountController {
 		Optional<Account> housedwithdrawalaccount = accountRepository.findById(2L);
 		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,
 				housewithdrawalcustomer, housedwithdrawalaccount.get(), Long.parseLong(amount), "Withdrawal");
+		customer = customerRepository.findByEmail(customer.getEmail());
+		model.addAttribute("customer", customer);
 		String accounturl = "?accountnumber=" + accountnumber;
 		return "redirect:/account" + accounturl;
 	}
@@ -148,6 +159,8 @@ public class AccountController {
 			
 			if(customer.getAccounts().size()!=0) 
 			{
+				customer = customerRepository.findByEmail(customer.getEmail());
+				model.addAttribute("customer", customer);
 //				customerRepository.save(customer);
 //				model.addAttribute("customer", new Customer());
 //				model.addAttribute("customer", customer);
@@ -225,5 +238,90 @@ public class AccountController {
 		return "checkordersuccess";
 
 	}
+	
+	@GetMapping("transfer")
+	String gettransfer(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			@ModelAttribute("accounttransactions") ArrayList<TransactionAsObjects> accounttransactions,
+			@ModelAttribute("customers") ArrayList<Customer> customers, Model model, HttpSession session) {
+//		ArrayList<Customer> customers = new ArrayList<Customer>();
+		customers = (ArrayList<Customer>) customerRepository.findAll();
+		model.addAttribute("customers", customers);
+		session.setAttribute("customers", customers);
+		
+//		customer = customerRepository.findByEmail(customer.getEmail());
+//		model.addAttribute("customer", customer);
 
+
+		
+		return "transfer";
+	}
+
+
+	@PostMapping("transfertoaccount")
+	String transfertoaccount(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			Model model, @RequestParam String transferamount, @RequestParam String transfertoaccount, HttpSession session,
+			RedirectAttributes redirect) {
+		
+		Account toaccount = accountRepository.findbyAccountNumber(Long.parseLong(transfertoaccount));
+		
+		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,
+				customer, toaccount, Long.parseLong(transferamount), "Transfer Between your Accounts");
+		
+		customer = customerRepository.findByEmail(customer.getEmail());
+		model.addAttribute("customer", customer);
+		
+		
+		return "transfer";
+	}
+	//transfertocustomer
+	
+	@PostMapping("transfertocustomer")
+	String transfertocustomer(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			@ModelAttribute("customers") ArrayList<Customer> customers,
+			Model model, @RequestParam String transferamount, @RequestParam String transfertocustomer, HttpSession session,
+			RedirectAttributes redirect) {
+		
+		Customer toCustomer = new Customer();
+		for (int i = 0; i < customers.size(); i++)
+		{
+			if(transfertocustomer.equalsIgnoreCase(customers.get(i).getFullName())) {
+				toCustomer = customers.get(i);
+			}
+		}
+
+		Account toaccount = toCustomer.getAccounts().get(0);
+		
+		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,
+				toCustomer, toaccount, Long.parseLong(transferamount), "Transfer to Customer");
+		
+		customer = customerRepository.findByEmail(customer.getEmail());
+		model.addAttribute("customer", customer);
+		
+		
+		return "transfer";
+	}
+	
+	//transfertoexternalcustomer
+	@PostMapping("transfertoexternalcustomer")
+	String transfertoexternalcustomer(@ModelAttribute("customer") Customer customer, @ModelAttribute("account") Account account,
+			@ModelAttribute("customers") ArrayList<Customer> customers,	Model model, @RequestParam String transferamount, 
+			@RequestParam String ToExternalRouter, @RequestParam String ToExternalNumber,
+			HttpSession session, RedirectAttributes redirect) {
+		
+		Customer toCustomer = customerRepository.findByEmail("4@e.c");
+		Account toaccount = toCustomer.getAccounts().get(0);
+
+
+		
+		
+		TransferManager.Transfer(customerRepository, accountRepository, transactionRepository, customer, account,
+				toCustomer, toaccount, Long.parseLong(transferamount), "Transfer to External Customer, Routing Code: "+ToExternalRouter+" Bank Account: "+ToExternalNumber);
+		
+		customer = customerRepository.findByEmail(customer.getEmail());
+		model.addAttribute("customer", customer);
+		
+		
+		return "transfer";
+	}
+	
 }
