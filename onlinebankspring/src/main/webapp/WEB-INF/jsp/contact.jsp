@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- nav -->
 		<nav class="py-3 d-lg-flex">
 			<div id="logo">
-				<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>
+				<h1> <a href="index"><span class="fa fa-university"></span> Bank of Everyone </a></h1>
 			</div>
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
@@ -113,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
-				<a href="index.jsp">Home</a>
+				<a href="index">Home</a>
 			</li>
 			<li class="breadcrumb-item" aria-current="page">Contact</li>
 		</ol>

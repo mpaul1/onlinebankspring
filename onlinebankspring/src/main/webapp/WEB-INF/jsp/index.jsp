@@ -119,8 +119,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper Nullam dui mi.
 								 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubiliacurae, Curabitur quis luctus lectus.
 								 Morbi at dui nisl.</p>
-								<a href="services.jsp" class="btn btn-banner my-3 mr-2">Read More</a>
-								<a href="openaccount.jsp" class="btn btn-banner1 my-3">Get Started</a>
+								<a href="services" class="btn btn-banner my-3 mr-2">Read More</a>
+								<a href="openaccount" class="btn btn-banner1 my-3">Get Started</a>
 							</div>
 						</li>						
 						<li>
@@ -130,8 +130,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper Nullam dui mi.
 								 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubiliacurae, Curabitur quis luctus lectus.
 								 Morbi at dui nisl.</p>
-								<a href="services.jsp" class="btn btn-banner my-3 mr-2">Read More</a>
-								<a href="contact.jsp" class="btn btn-banner1 my-3">Get Started</a>
+								<a href="services" class="btn btn-banner my-3 mr-2">Read More</a>
+								<a href="contact" class="btn btn-banner1 my-3">Get Started</a>
 							</div>
 						</li>
 
@@ -142,8 +142,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper Nullam dui mi.
 								 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubiliacurae, Curabitur quis luctus lectus.
 								 Morbi at dui nisl.</p>
-								<a href="services.jsp" class="btn btn-banner my-3 mr-2">Read More</a>
-								<a href="contact.jsp" class="btn btn-banner1 my-3">Get Started</a>
+								<a href="services" class="btn btn-banner my-3 mr-2">Read More</a>
+								<a href="contact" class="btn btn-banner1 my-3">Get Started</a>
 							</div>
 						</li>
 					</ul>

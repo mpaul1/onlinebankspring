@@ -66,8 +66,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- nav -->
 		<nav class="py-3 d-lg-flex">
 			<div id="logo">
-<!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
-				<h1><a href="index3.jsp"><span class="fa fa-university"> Bank of <Strong><% out.print(" "+customer.getFirstName()); %></Strong></a></h1>
+<!-- 			<h1> <a href="index"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
+				<h1><a href="index3"><span class="fa fa-university"> Bank of <Strong><% out.print(" "+customer.getFirstName()); %></Strong></a></h1>
 			</div>
 			<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
 			<input type="checkbox" id="drop" />
@@ -112,7 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
-				<a href="index3.jsp">Home</a>
+				<a href="index3">Home</a>
 			</li>
 			<li class="breadcrumb-item" aria-current="page">Account Detail</li>
 		</ol>
@@ -155,9 +155,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <li class="nav-item mx-1" >
       	<a href="transfer" class="btn btn-info btn-round" type="button" id="transferbutton" style="color: #fff;">Transfer Funds</a>
       </li>
-      <li class="nav-item mx-1">
+<!--       <li class="nav-item mx-1">
        <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#MonthlyStatementModal">Get Monthly Statement</button>
-      </li>
+      </li> -->
       <li class="nav-item mx-1">
        <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#orderChecksModal">Order Checks</button>
       </li>

@@ -103,7 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
-				<a href="index3.jsp">Home</a>
+				<a href="index3">Home</a>
 			</li>
 			<li class="breadcrumb-item" aria-current="page">Transfer</li>
 		</ol>

@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 
@@ -23,15 +27,35 @@ public abstract class Person
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected long personId;
 	
+	@NotNull(message="First Name cannot be blank")
+	@Size(min=1, message="First Name must be at least 1 character")
 	protected String firstName="";
+	@NotNull(message="Last Name cannot be blank")
+	@Size(min=1, message="Last Name must be at least 1 character")
 	protected String lastName="";
+	@NotNull(message="Telephone cannot be blank")
+	@Size(min=10, message="Telephone must be at least 10 characters")
 	protected String telephoneNumber="";
+	@NotNull(message="Email Name cannot be blank")
+	@Email
 	protected String email="";
+	@NotNull(message="Password Name cannot be blank")
+	@Size(min=4, message="Password must be at least 4 characters")
 	protected String password="";
+	@NotNull(message="Street cannot be blank")
+	@Size(min=4, message="Street must be at least 4 characters")
 	protected String street="";
+	@NotNull(message="City cannot be blank")
+	@Size(min=4, message="City must be at least 4 characters")
 	protected String city="";
+	@NotNull(message="State cannot be blank")
+	@Size(min=2, max=2, message="State must be 2 characters")
 	protected String state="";
+	@NotNull(message="Zip Code cannot be blank")
+	@Size(min=5, message="Zip Code must be at least 5 characters")
 	protected String zipCode="";
+	@NotNull(message="Intial Deposit cannot be blank")
+	@Min(value=1L, message="Initial Deposit must be greater than $0")
 	protected long initialDeposit;
 	
 	@OneToMany(mappedBy = "person",fetch=FetchType.EAGER)

@@ -86,7 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
-				<a href="index.jsp">Home</a>
+				<a href="index">Home</a>
 			</li>
 			<li class="breadcrumb-item" aria-current="page">New Account</li>
 		</ol>
@@ -105,48 +105,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<form:form class="col-md-6 col-sm-6 col-xs-12" modelAttribute="customer" action="openaccount" method="post">
                 <div class="form-group">
                 	<label for="firstName">First Name</label>
-                	<form:input path="firstName" class="form-control" id="name" placeholder="Your First Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                    <div class="validation"></div>
+                	<form:input path="firstName" class="form-control" id="name" placeholder="Your First Name" />
+                    <form:errors path="firstName" cssClass="error" />
                 </div>
                 <div class="form-group">
                 	<label for="lastName">Last Name</label>
                   <form:input type="text" path="lastName" class="form-control" id="lastname" placeholder="Your Last Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="lastName" cssClass="error" />
                 </div>
                 <div class="form-group">
                 <label for="email">Email</label>
                   <form:input type="email" class="form-control" path="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validation"></div>
+                  <form:errors path="email" cssClass="error" />
                 </div>
                <div class="form-group">
                 <label for="password">Password</label>
                   <form:input type="password" class="form-control" path="password" id="password" placeholder="The password you would like to use to login" data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="password" cssClass="error" />
                 </div>
                 <div class="form-group">
 				  <label for="telephone">Telephone</label>
 				    <form:input class="form-control bfh-phone" type="tel" path="telephoneNumber" placeholder="1-(555)-555-5555" id="telephone" data-rule="telephone" data-message="Please enter a valid telephone" data-format="+1 (ddd) ddd-dddd" />
-				  <div class="validation"></div>
+				  <form:errors path="telephoneNumber" cssClass="error" />
 				</div>
 				<div class="form-group">
                 <label for="street">Street Address</label>
                   <form:input type="text" class="form-control" path="street" id="street" placeholder="Your Street Address" data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="street" cssClass="error" />
                 </div>
                 <div class="form-group">
                 <label for="city">City</label>
                   <form:input type="text" class="form-control" path="city" id="city" placeholder="Your City" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="city" cssClass="error" />
                 </div>
                 <div class="form-group">
                 <label for="state">State</label>
                   <form:input type="text" class="form-control" path="state" id="state" placeholder="Your State" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="state" cssClass="error" />
                 </div>
                 <div class="form-group">
                 <label for="zip">Zip Code</label>
                   <form:input type="text" class="form-control" path="zipCode" id="zip" placeholder="Your Zip Code" data-rule="minlen:5" data-msg="Please enter at least 5 chars" />
-                  <div class="validation"></div>
+                  <form:errors path="zipCode" cssClass="error" />
                 </div>
 				<div><label for="initialdeposit">Initial Deposit</label></div>
  				<div class="form-group input-group mb-3">	
@@ -156,9 +156,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  					 <form:input type="text" class="form-control" path="initialDeposit" id="initialdeposit" placeholder="Your Inital Deposit" data-rule="minlen:1" data-msg="Please enter at least 1 chars" aria-label="Amount (to the nearest dollar)" />
 					 <div class="input-group-append">
  					   <span class="input-group-text">.00</span>
- 					 </div>
- 					 <div class="validation"></div>
+ 					 </div> 					 
 				</div>
+				<div class="form-group">
+ 					 <form:errors path="initialDeposit" cssClass="error" />
+ 					 </div>
  
                 <div class="text-center mb-sm-5 mb-4"><button type="submit">Submit</button></div>
               </form:form>

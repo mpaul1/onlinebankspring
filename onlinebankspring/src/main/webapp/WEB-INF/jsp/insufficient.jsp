@@ -65,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- nav -->
 			<nav class="py-3 d-lg-flex">
 				<div id="logo">
-					<!-- 			<h1> <a href="index.jsp"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
+					<!-- 			<h1> <a href="index"><span class="fa fa-university"></span> Bank of Everyone </a></h1>-->
 					<h1>
 						<a href="index3"><span class="fa fa-university">
 								Bank of </span>
@@ -95,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li class=""><a href="addaccount">Add Account</a></li>
 					<li class=""><a href="profile">Profile</a></li>
 					<li class=""><a href="signout">Signout</a></li>
-					<!--				<li class=""><a href="services.jsp">Services</a></li>
+					<!--				<li class=""><a href="services">Services</a></li>
  				<li class=""><a href="blog.jsp">Blog</a></li>  
 				<li class=""><a href="contact.jsp">Contact</a></li>
 				<li class=""><a href="openaccount.jsp"><strong>Open New Account</strong></a></li>
@@ -120,7 +120,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container py-1">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index3.jsp">Home</a></li>
+					<li class="breadcrumb-item"><a href="index3">Home</a></li>
 					<li class="breadcrumb-item" aria-current="page">Insufficient Funds</li>
 				</ol>
 			</nav>
